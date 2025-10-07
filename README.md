@@ -14,3 +14,9 @@ Este proyecto es parte del Certificado Profesional N3 en Desarrollo de Aplicacio
 - HTML5
 - CSS3
 - JavaScript (DOM, eventos)
+
+## Demo
+[Accede a la demo](http://dnavar443:rl9RqMdt@www.dnavarro.com.mialias.net/Contador/indice.html)
+
+## Autor
+Proyecto desarrollado por DeneC11 como parte del curso de Desarrollo Web.
