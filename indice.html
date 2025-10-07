@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador</title>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 18px;
+            /*1rem = 18px*/
+        }
+
+        body {
+            font-family: "Electrolize", sans-serif;
+            height: 100vh;
+            /* background-color: #1E1E2F; */
+            background: radial-gradient(circle, #4e4e64 20%, #1E1E2F 100%);
+
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90dvh;
+        }
+
+        .counterDiv {
+            width: 30rem;
+            /* background-color: #3A3D5F; */
+            background: radial-gradient(circle, #4e4e64 10%, #1E1E2F 100%);
+            border: 5px solid #A57BFF;
+            box-shadow: 0px 0px 50px #A57BFF;
+            color: #F4F4F4;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+
+        .counterDiv>* {
+            /*solo a los hijos*/
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 0px 0px 20px #F4F4F4;
+        }
+
+        .countContainer {
+            position: relative;
+            border-bottom: 2px solid #F4F4F4;
+            /* border: 1px solid red; */
+            height: 70px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+
+        }
+
+        .count {
+            position: absolute;
+            font-size: 3rem;
+            text-shadow: 0 0 15px #00FFAB;
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        .buttons button {
+            border: none;
+            color: #3A3D5F;
+            border-radius: 5px;
+            padding: 0.5rem 1.5rem;
+            cursor: pointer;
+            font-size: 2rem;
+        }
+
+        button.subtract {
+            /* background-color: #c72e00; */
+            background: radial-gradient(circle, #a52700 30%, #c72e00 100%);
+            border: 5px solid #ad2800;
+
+            &:hover {
+                color: #FF3D00;
+                border-color: #FF3D00;
+                box-shadow: 0 0 40px #FF3D00;
+            }
+        }
+
+        button.reset {
+            /* background-color: #d1a000; */
+            background: radial-gradient(circle, #a88100 30%, #d1a000 100%);
+            border: 5px solid #bd9100;
+
+            &:hover {
+                color: #FFC300;
+                border-color: #FFC300;
+                box-shadow: 0 0 40px #FFC300;
+            }
+        }
+
+        button.add {
+            /* background-color: #00c583; */
+            background: radial-gradient(circle, #009966 30%, #00c583 100%);
+            border: 5px solid #01a870;
+
+            &:hover {
+                color: #00FFAB;
+                border-color: #00FFAB;
+                box-shadow: 0 0 40px #00FFAB;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="counterDiv">
+            <h1>Aplicación contador</h1>
+            <div class="countContainer">
+                <span class="count">0</span>
+            </div>
+            <div class="buttons">
+                <button class="subtract" title="Decrementar"><i  class="fa-solid fa-arrow-trend-down subtract"></i></button>
+                <button class="reset" title="Resetear"><i class="fa-solid fa-rotate-left reset"></i></button>
+                <button class="add" title="Incrementar"><i class="fa-solid fa-arrow-trend-up add"></i></button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const count = document.querySelector('.count');
+        const buttons = document.querySelector('.buttons');
+        let shadowSize = 10;
+        let textSize = 54;
+        let intervalo;
+        ponColor();
+        buttons.addEventListener('click', (e) => {
+            // console.log(e.target)
+            if (e.target.classList.contains("subtract")) {
+                count.innerHTML--;
+                textSize--;
+                count.style.fontSize = `${textSize}px`;
+                ponColor();
+            } else if (e.target.classList.contains("add")) {
+                count.innerHTML++;
+                textSize++;
+                count.style.fontSize = `${textSize}px`;
+                ponColor();
+            } else if (e.target.classList.contains("reset")) {
+                count.innerHTML = 0;
+                textSize = 54;
+                count.style.fontSize = `${textSize}px`;
+                ponColor();
+            }
+        })
+        function ponColor() {
+            if (count.innerHTML > 0) {
+                // console.log('+0')
+                count.style.color = '#00FFAB';
+                shadowSize++;
+                count.style.textShadow = `0px 0px ${shadowSize}px #00FFAB`;
+
+                console.log(textSize);
+            } else if (count.innerHTML == 0) {
+                // console.log('+0')
+                count.style.color = '#FFC300';;
+                count.style.textShadow = `0px 0px 50px #FFC300`;
+                console.log(textSize);
+                shadowSize = 10;
+            } else if (count.innerHTML < 0) {
+                // console.log('+0')
+                count.style.color = '#FF3D00';
+                shadowSize++;
+                count.style.textShadow = `0px 0px ${shadowSize}px #FF3D00`;
+                console.log(textSize);
+            }
+        }
+    </script>
+</body>
+
+</html>
